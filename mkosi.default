@@ -1,0 +1,20 @@
+[Distribution]
+Distribution=ubunutu
+Architecture=x86_64
+
+[Validation]
+Password=root
+
+[Packages]
+WithNetwork=true
+WithDocs=true
+Packages=
+  emacs
+
+[Partitions]
+RootSize=5G
+
+[Output]
+Bootable=yes
+Hostname=yes
+Output=image.raw

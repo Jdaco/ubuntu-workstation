@@ -1,0 +1,7 @@
+# Vagrant
+.vagrant
+
+# Mkosi files
+mkosi-cache
+image.raw
+image.nspawn

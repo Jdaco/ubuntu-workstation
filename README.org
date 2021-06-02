@@ -1,0 +1,51 @@
+* ubuntu-workstation
+- OS :: ubunutu
+
+** Services
+- sshd
+
+** Users
+- root
+  + Default password: root
+- chaise
+  - Default password: toor
+
+** Usage
+Produce a bootable disk image as `image.raw`:
+#+BEGIN_SRC shell
+make
+#+END_SRC
+
+Test your created image:
+#+BEGIN_SRC shell
+make boot
+#+END_SRC
+
+This will boot the image in a systemd-nspawn container.
+
+To get network access in the container, make sure the `systemd-networkd` service is running on your machine and in the container.
+
+To boot the image using a QEMU VM instead:
+#+BEGIN_SRC shell
+make boot-qemu
+#+END_SRC
+
+This more accurately resembles how the OS will behave when it's installed on a machine.
+
+**Note:** You won't be able to do this from within vagrant
+
+You can also start a shell within the image without starting system:
+#+BEGIN_SRC shell
+make shell
+#+END_SRC
+
+~make mostlyclean~ will remove all files except for the package cache. The cache is helpful for speeding up subsequent builds. If you want to remove the cache as well you can use ~make clean~
+
+** Post-Installtion Steps
+1. Resize Partitions
+2. Configure Networking
+
+** References
+- [[https://github.com/systemd/mkosi/blob/master/mkosi.md][mkosi - Man Page]]
+- [[http://0pointer.net/blog/mkosi-a-tool-for-generating-os-images.html][mkosi — A Tool for Generating OS Images]]
+- [[https://wiki.archlinux.org/index.php/Systemd-nspawn#Configure_networking][systemd-nspawn - Configuring networking - ArchWiki]]

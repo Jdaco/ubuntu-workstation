@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+
+
+function set_locale() {
+    update-locale LANG=$1 LC_ALL=$1
+
+    export LANG=$1
+    export LC_ALL=$1
+}
+
+function setup_sudo() {
+    groupadd -f sudo
+    echo '%sudo ALL=(ALL) ALL' > /etc/sudoers
+}
+
+function add_user() {
+    useradd --create-home --groups users,sudo --no-user-group ${1}
+    echo "${1}:${2}" | chpasswd
+}
+
+package_setup
+set_locale "C.UTF-8"
+setup_sudo
+add_user chaise toor
+install_docker
+
+# Enable systemd networking
+systemctl enable systemd-networkd
