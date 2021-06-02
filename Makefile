@@ -14,7 +14,7 @@ all: $(OS_IMG)
 
 .PHONY: boot-qemu
 boot-qemu: ## Boot the machine image using QEMU
-    @qemu-system-x86_64 \
+	@qemu-system-x86_64 \
         -smp 2 \
         -m 2048 \
         -enable-kvm \
@@ -29,27 +29,27 @@ boot-qemu: ## Boot the machine image using QEMU
 
 .PHONY: help
 help: ## Show help message
-    @grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:[[:blank:]]*\(##\)[[:blank:]]*/\1/' | column -s '##' -t
+	@grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:[[:blank:]]*\(##\)[[:blank:]]*/\1/' | column -s '##' -t
 
 $(OS_IMG): ## Generate the raw disk image
-    @mkdir -p $(CACHE_DIR)
-    sudo $(MKOSI) --cache $(CACHE_DIR) --output $(TEMPORARY_PATH)/$(OS_IMG)
-    @mv --verbose --no-clobber $(TEMPORARY_PATH)/$(OS_IMG) $(TEMPORARY_PATH)/$(OS_IMG_NSPAWN) .
+	@mkdir -p $(CACHE_DIR)
+	sudo mkosi --cache $(CACHE_DIR) --output $(TEMPORARY_PATH)/$(OS_IMG)
+	@mv --verbose --no-clobber $(TEMPORARY_PATH)/$(OS_IMG) $(TEMPORARY_PATH)/$(OS_IMG_NSPAWN) .
 
 .PHONY: boot
 boot: ## Boot into the system
-    sudo mkosi -o $(OS_IMG) boot
+	sudo mkosi -o $(OS_IMG) boot
 
 .PHONY: shell
 shell: ## Enter a shell in the system (without booting it)
-    sudo mkosi -o $(OS_IMG) shell
+	sudo mkosi -o $(OS_IMG) shell
 
 .PHONY: mostlyclean
 mostlyclean: ## Remove created files, excluding the package cache
-    @rm -f $(OS_IMG)
-    sudo mkosi -o $(OS_IMG) -f clean
-    sudo rm -rf .mkosi-*
+	@rm -f $(OS_IMG)
+	sudo mkosi -o $(OS_IMG) -f clean
+	sudo rm -rf .mkosi-*
 
 .PHONY: clean
 clean: mostlyclean ## Remove all created files
-    @rm -rf $(CACHE_DIR)
+	@rm -rf $(CACHE_DIR)

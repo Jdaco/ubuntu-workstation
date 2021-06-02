@@ -1,5 +1,5 @@
 * ubuntu-workstation
-- OS :: ubunutu
+- OS :: ubuntu
 
 ** Services
 - sshd
