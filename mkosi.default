@@ -11,11 +11,44 @@ WithNetwork=true
 WithDocs=true
 Packages=
   emacs
+  git
+  vim
+  firefox
+  locales
+  openssh-server
+  openssh-server
+  inetutils-ping
+  net-tools
+  iproute2
+  curl
+  wget
+  dhcpcd5
+  wireless-tools
+  wpasupplicant
+  usbutils
+  sudo
+  man
+  build-essential
+  software-properties-common
+  lightdm
+  slick-greeter
+  libvirt-daemon
+  libvirt-daemon-driver-qemu
+  libvirt-clients
+  cryptsetup
+  cryptsetup-bin
+  cryptsetup-initramfs
+  pulseaudio
+  pulsemixer
+  gpg-agent
+  xorg
 
 [Partitions]
 RootSize=5G
+SwapSize=1G
 
 [Output]
 Bootable=yes
-Hostname=yes
+Hostname=beta
+Format=gpt_btrfs
 Output=image.raw

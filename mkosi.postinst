@@ -1,7 +1,20 @@
 #!/bin/bash
 set -e
 
+function install_guix() {
+    cd /tmp
+    wget https://git.savannah.gnu.org/cgit/guix.git/plain/etc/guix-install.sh
+    chmod +x guix-install.sh
+    ./guix-install.sh
+}
 
+function download_dotfiles() {
+    home="/home/$1"
+    path="${home}/dotfiles"
+    git clone https://github.com/Jdaco/dotfiles ${path}
+    chown -R $1 ${path}
+    ${path}/bin/config-tangle ${home}/dotfiles ${home}
+}
 
 function set_locale() {
     update-locale LANG=$1 LC_ALL=$1
@@ -20,11 +33,13 @@ function add_user() {
     echo "${1}:${2}" | chpasswd
 }
 
-package_setup
+user=chaise
+
 set_locale "C.UTF-8"
 setup_sudo
-add_user chaise toor
-install_docker
+add_user ${user} toor
+# install_guix
+download_dotfiles ${user}
 
 # Enable systemd networking
 systemctl enable systemd-networkd
