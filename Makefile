@@ -1,6 +1,7 @@
 CACHE_DIR=mkosi-cache
 OS_IMG=image.raw
 OS_IMG_NSPAWN = $(basename $(OS_IMG)).nspawn
+OVMF_PATH := /usr/share/ovmf/OVMF.fd
 
 ifeq ($(shell whoami),vagrant)
     TEMPORARY_PATH := /home/vagrant
@@ -20,7 +21,7 @@ boot-qemu: ## Boot the machine image using QEMU
         -enable-kvm \
         -vga std \
         -cpu host \
-    -drive if=pflash,format=raw,readonly,file=/usr/share/ovmf/x64/OVMF_CODE.fd \
+    -drive if=pflash,format=raw,readonly,file= $(OVMF_PATH) \
         -drive format=raw,file=$(OS_IMG) \
     -object rng-random,filename=/dev/urandom,id=rng0 \
         -device virtio-rng-pci,rng=rng0,id=rng-device0 \
