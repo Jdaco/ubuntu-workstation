@@ -46,6 +46,9 @@ make shell
 2. Configure Networking
 3. Change passwords
 4. Install guix
+5. Install Microsoft Teams
+   a. Download and install the .deb file
+   b. Make sure =libsecret-1-0= is installed (this was causing an error on startup)
 
 ** References
 - [[https://github.com/systemd/mkosi/blob/master/mkosi.md][mkosi - Man Page]]
