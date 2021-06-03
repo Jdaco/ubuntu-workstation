@@ -1,8 +1,8 @@
-* ubuntu-workstation
-- OS :: ubuntu
-
-** Services
-- sshd
+* Ubuntu Workstation
+- OS :: Ubuntu (hirsute)
+- Init :: Systemd
+- Display :: Xorg
+- Window Manager :: EXWM (i3 for debugging)
 
 ** Users
 - root
@@ -44,6 +44,8 @@ make shell
 ** Post-Installtion Steps
 1. Resize Partitions
 2. Configure Networking
+3. Change passwords
+4. Install guix
 
 ** References
 - [[https://github.com/systemd/mkosi/blob/master/mkosi.md][mkosi - Man Page]]
