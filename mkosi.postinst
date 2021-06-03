@@ -9,11 +9,23 @@ function install_guix() {
 }
 
 function download_dotfiles() {
+    home="/tmp/skel"
+    mkdir ${home}
+    git clone https://github.com/Jdaco/dotfiles ${home}/dotfiles
+    git clone https://github.com/hlissner/doom-emacs ${home}/.emacs.d
+
+    # i3
+    mkdir -p ${home}/.config/i3
+    echo "exec xterm" > ${home}/.config/i3/config
+
+    # org-roam
+    mkdir -p ${home}/sync/roam
+}
+
+function install_dotfiles() {
     home="/home/$1"
-    path="${home}/dotfiles"
-    git clone https://github.com/Jdaco/dotfiles ${path}
-    chown -R $1 ${path}
-    ${path}/bin/config-tangle ${home}/dotfiles ${home}
+    su -c "cd ${home} && dotfiles/bin/config-tangle ~/dotfiles ~ beta" $1
+    su -c "cd ${home} && .emacs.d/bin/doom install --no-config --no-env" $1
 }
 
 function set_locale() {
@@ -29,7 +41,7 @@ function setup_sudo() {
 }
 
 function add_user() {
-    useradd --create-home --groups users,sudo --no-user-group ${1}
+    useradd --shell /bin/bash --create-home --groups users,sudo --no-user-group --skel /tmp/skel ${1}
     echo "${1}:${2}" | chpasswd
 }
 
@@ -37,9 +49,12 @@ user=chaise
 
 set_locale "C.UTF-8"
 setup_sudo
+download_dotfiles
 add_user ${user} toor
+install_dotfiles ${user}
 # install_guix
-download_dotfiles ${user}
 
-# Enable systemd networking
-systemctl enable systemd-networkd
+# Networking
+systemctl disable wpa_supplicant
+systemctl disable dhcpcd
+systemctl disable netctl

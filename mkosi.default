@@ -1,6 +1,6 @@
 [Distribution]
 Distribution=ubuntu
-Release=focal
+Release=hirsute
 Architecture=x86_64
 
 [Validation]
@@ -42,12 +42,24 @@ Packages=
   pulsemixer
   gpg-agent
   xorg
+  sqlite3
+  systemd-container
+  mkosi
+  i3-wm
+  xterm
+  exa
+  less
+  netctl
+  isc-dhcp-client
+  acpi
+  syncthing
+  mpv
 
 [Partitions]
-RootSize=5G
-SwapSize=1G
+RootSize=6G
 
 [Output]
+Encrypt=all
 Bootable=yes
 Hostname=beta
 Format=gpt_btrfs
