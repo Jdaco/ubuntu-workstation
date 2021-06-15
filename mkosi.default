@@ -40,20 +40,27 @@ Packages=
   cryptsetup-initramfs
   pulseaudio
   pulsemixer
-  gpg-agent
   xorg
   sqlite3
   systemd-container
   mkosi
   i3-wm
   xterm
-  exa
   less
   netctl
   isc-dhcp-client
   acpi
+  podman
+  # Guix Packages
+  exa
   syncthing
   mpv
+  pass
+  gpg-agent
+  pinentry
+  plantuml
+
+
 
 [Partitions]
 RootSize=6G
