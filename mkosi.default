@@ -16,7 +16,6 @@ Packages=
   firefox
   locales
   openssh-server
-  openssh-server
   inetutils-ping
   net-tools
   iproute2
@@ -34,7 +33,11 @@ Packages=
   slick-greeter
   libvirt-daemon
   libvirt-daemon-driver-qemu
+  libvirt-daemon-system
   libvirt-clients
+  libvirt-dev
+  vagrant
+  vagrant-libvirt
   cryptsetup
   cryptsetup-bin
   cryptsetup-initramfs
@@ -51,7 +54,10 @@ Packages=
   isc-dhcp-client
   acpi
   podman
+  rsync
+  mlocate
   # Guix Packages
+  pandoc
   exa
   syncthing
   mpv
@@ -59,6 +65,10 @@ Packages=
   gpg-agent
   pinentry
   plantuml
+  python3
+  python3-poetry
+  virtinst
+
 
 
 
