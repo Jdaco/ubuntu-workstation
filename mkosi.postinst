@@ -51,6 +51,10 @@ function add_user() {
     echo "${1}:${2}" | chpasswd
 }
 
+function setup_pass() {
+    ln -s /mnt/passwords /home/$1/.password-store
+}
+
 user=chaise
 
 set_locale "C.UTF-8"
