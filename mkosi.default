@@ -57,6 +57,8 @@ Packages=
   rsync
   mlocate
   wireguard
+  aws
+  aws-shell
   # Guix Packages
   pandoc
   exa
